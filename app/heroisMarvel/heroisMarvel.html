@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="card">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">
+                <input type="text" ng-model="vm.pesquisa" placeholder="Digite um nome" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="personagens in vm.personagemFiltrado|filter:vm.pesquisa|orderBy:personagens.name"
+              ng-click="vm.filtraHeroi(personagens.id)" data-toggle="modal" data-target="#myModal">
+              <th scope="row">
+                <img src={{personagens.thumbnail.path}}.{{personagens.thumbnail.extension}}
+                                   alt="Card image cap" width="100" height="100"></th>
+              <td><h5 class="card-title">{{personagens.name }}</h5></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div data-pagination="" data-num-pages="numPages()"
+             data-current-page="currentPage" data-max-size="maxSize"
+             data-boundary-links="true"></div>
+      </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{vm.listaFiltrada.name}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">
+              <img src={{vm.listaFiltrada.thumbnail.path}}.{{vm.listaFiltrada.thumbnail.extension}}
+                   alt="Card image cap" width="300" height="300">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">Nome das séries</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="series in vm.listaFiltrada.series.items">
+                  <th scope="row"><p class="card-title"> {{series.name}}</p>
+                    </th>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                  <th scope="col">Nome dos stories</th>
+                  <td>Tipo</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="quadrinhos in vm.listaFiltrada.stories.items">
+                  <th scope="row"><p class="card-title"> {{quadrinhos.name}}</p>
+                  </th>
+                  <th scope="row"><p class="card-title"> {{quadrinhos.type}}</p>
+                  </th>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.fechaModal()">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
