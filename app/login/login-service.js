@@ -7,8 +7,8 @@ function loginService($http) {
     login: login
   };
 
-  // var url = 'https://sf-marvel.herokuapp.com/login';
-  var url = 'http://localhost:8000/login'
+  var url = 'https://herois-marvel-safra.herokuapp.com/login';
+  // var url = 'http://localhost:8000/login'
 
 
   function login(user, senha) {

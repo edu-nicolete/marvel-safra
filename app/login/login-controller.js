@@ -13,7 +13,6 @@ function loginController($cookies, loginService, $location) {
     iniciar();
 
     function iniciar() {
-      console.log('entrou');
         vm.handleLogin = false;
         vm.token = $cookies.get('tokenValidado');
         if (vm.token) {
