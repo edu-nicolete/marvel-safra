@@ -74,11 +74,10 @@ function heroisMarvel(heroisMarvelService, $routeParams, $location, $scope, $coo
 
   function filtra(pesquisa) {
     if (pesquisa !== undefined && pesquisa.length > 0) {
-      vm.personagemFiltrado = [];
-      vm.personagemFiltrado = vm.listaPersonagens.filter(function (p) {
-        if (p.name.toLowerCase().includes(pesquisa.toLowerCase())) {
-          return p;
-        };
+      heroisMarvelService.filtraPersonagem(pesquisa).then(function (response) {
+        if (response != null) {
+          vm.personagemFiltrado = response.data.data.results;
+        }
       });
     }
     else {

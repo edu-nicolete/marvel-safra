@@ -6,7 +6,8 @@ function heroisMarvelService($http) {
     var ergastAPI = {
         buscaTudo: buscaTudo,
         buscarPersonagemEspecifico: buscarPersonagemEspecifico,
-        buscarSerie: buscarSerie
+        buscarSerie: buscarSerie,
+        filtraPersonagem: filtraPersonagem
     };
     const config = {
         params:{
@@ -22,11 +23,17 @@ function heroisMarvelService($http) {
     };
 
     function buscarSerie(url) {
-        return $http.get(url, config);
+        var ur = new URL(url);
+        console.log(ur);
+        return $http.get('https://'+ur.host+ur.pathname, config);
     }
 
     function buscarPersonagemEspecifico(id) {
         return $http.get('https://gateway.marvel.com/v1/public/characters/'+id, config);
+    };
+
+    function filtraPersonagem(nome) {
+        return $http.get('https://gateway.marvel.com/v1/public/characters?name='+nome, config);
     };
 
     return ergastAPI;
